@@ -137,7 +137,7 @@ You can view the logging using python code or various tools.
 
 - for SSE   
 	Open a browser and enter the IP address of the ESP32 in the address bar.
-	![Image](https://github.com/user-attachments/assets/15a45454-03c1-49be-a5fa-1e1328c24d89)
+	![Image](https://github.com/user-attachments/assets/037a33e7-0fe5-40f0-a05d-110d58a35c41)
 
 
 # Using linux rsyslogd as logger   
