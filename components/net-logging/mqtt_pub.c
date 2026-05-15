@@ -139,7 +139,7 @@ void mqtt_pub(void *pvParameters)
 		char *buffer = (char *)xRingbufferReceive(xRingBufferMQTT, &received, portMAX_DELAY);
 		//printf("xRingBufferReceive received=%d\n", received);
 #else
-		char buffer[xItemSize];
+		char buffer[NET_LOGGING_XITEMSIZE];
 		size_t received = xMessageBufferReceive(xMessageBufferMQTT, buffer, sizeof(buffer), portMAX_DELAY);
 		//printf("xMessageBufferReceive received=%d\n", received);
 #endif

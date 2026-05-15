@@ -104,7 +104,7 @@ void serve_client(void *pvParameters) {
       size_t received;
       char *buffer = (char *)xRingbufferReceive(xRingBufferSSE, &received, pdMS_TO_TICKS(10));
       #else
-      char buffer[xItemSize];
+      char buffer[NET_LOGGING_XITEMSIZE];
       size_t received = xMessageBufferReceive(xMessageBufferSSE, buffer, sizeof(buffer), pdMS_TO_TICKS(10));
       #endif
 
