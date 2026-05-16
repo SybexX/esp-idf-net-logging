@@ -34,20 +34,20 @@ bool writeToStdout;
 
 int logging_vprintf( const char *fmt, va_list l ) {
 	// Convert according to format
-	char buffer[xItemSize];
+	char buffer[NET_LOGGING_XITEMSIZE];
 	//int buffer_len = vsprintf(buffer, fmt, l);
-	int buffer_len = vsnprintf(buffer, xItemSize, fmt, l);
+	int buffer_len = vsnprintf(buffer, NET_LOGGING_XITEMSIZE, fmt, l);
 
 #if 0
-	xItemSize > buffer_len
+	NET_LOGGING_XITEMSIZE > buffer_len
 	I (307) MAIN: xItemSize=20 buffer_len=11 strlen(buffer)=11
 	I (307) MAIN: buffer=[76 61 6c 75 65 3a 20 31 30 30 0a]
 
-	xItemSize = buffer_len
+	NET_LOGGING_XITEMSIZE = buffer_len
 	I (307) MAIN: xItemSize=11 buffer_len=11 strlen(buffer)=10
 	I (307) MAIN: buffer=[76 61 6c 75 65 3a 20 31 30 30 00]
 
-	xItemSize < buffer_len
+	NET_LOGGING_XITEMSIZE < buffer_len
 	I (307) MAIN: xItemSize=10 buffer_len=11 strlen(buffer)=9
 	I (307) MAIN: buffer=[76 61 6c 75 65 3a 20 31 30 00 00]
 #endif
@@ -120,12 +120,12 @@ esp_err_t udp_logging_init(const char *ipaddr, unsigned long port, int16_t enabl
 #if CONFIG_NET_LOGGING_USE_RINGBUFFER
 	printf("start udp logging(xRingBuffer): ipaddr=[%s] port=%ld\n", ipaddr, port);
 	// Create RineBuffer
-	xRingBufferUDP = xRingbufferCreate(xBufferSizeBytes, RINGBUF_TYPE_NOSPLIT);
+	xRingBufferUDP = xRingbufferCreate(NET_LOGGING_XBUFFERSIZEBYTES, RINGBUF_TYPE_NOSPLIT);
 	configASSERT( xRingBufferUDP );
 #else
 	printf("start udp logging(xMessageBuffer): ipaddr=[%s] port=%ld\n", ipaddr, port);
 	// Create MessageBuffer
-	xMessageBufferUDP = xMessageBufferCreate(xBufferSizeBytes);
+	xMessageBufferUDP = xMessageBufferCreate(NET_LOGGING_XBUFFERSIZEBYTES);
 	configASSERT( xMessageBufferUDP );
 #endif
 
@@ -163,12 +163,12 @@ esp_err_t tcp_logging_init(const char *ipaddr, unsigned long port, int16_t enabl
 #if CONFIG_NET_LOGGING_USE_RINGBUFFER
 	printf("start tcp logging(xRingBuffer): ipaddr=[%s] port=%ld\n", ipaddr, port);
 	// Create RineBuffer
-	xRingBufferTCP = xRingbufferCreate(xBufferSizeBytes, RINGBUF_TYPE_NOSPLIT);
+	xRingBufferTCP = xRingbufferCreate(NET_LOGGING_XBUFFERSIZEBYTES, RINGBUF_TYPE_NOSPLIT);
 	configASSERT( xRingBufferTCP );
 #else
 	printf("start tcp logging(xMessageBuffer): ipaddr=[%s] port=%ld\n", ipaddr, port);
 	// Create MessageBuffer
-	xMessageBufferTCP = xMessageBufferCreate(xBufferSizeBytes);
+	xMessageBufferTCP = xMessageBufferCreate(NET_LOGGING_XBUFFERSIZEBYTES);
 	configASSERT( xMessageBufferTCP );
 #endif
 
@@ -206,12 +206,12 @@ esp_err_t sse_logging_init(unsigned long port, int16_t enableStdout) {
 #if CONFIG_NET_LOGGING_USE_RINGBUFFER
 	printf("start HTTP Server Sent Events logging(xRingBuffer): SSE server listening on port=%ld\n", port);
 	// Create RineBuffer
-	xRingBufferSSE = xRingbufferCreate(xBufferSizeBytes, RINGBUF_TYPE_NOSPLIT);
+	xRingBufferSSE = xRingbufferCreate(NET_LOGGING_XBUFFERSIZEBYTES, RINGBUF_TYPE_NOSPLIT);
 	configASSERT( xRingBufferSSE );
 #else
 	printf("start HTTP Server Sent Events logging(xMessageBuffer): SSE server starting on port=%ld\n", port);
 	// Create MessageBuffer
-	xMessageBufferSSE = xMessageBufferCreate(xBufferSizeBytes);
+	xMessageBufferSSE = xMessageBufferCreate(NET_LOGGING_XBUFFERSIZEBYTES);
 	configASSERT( xMessageBufferSSE );
 #endif
 
@@ -248,12 +248,12 @@ esp_err_t mqtt_logging_init(const char *url, char *topic, int16_t enableStdout) 
 #if CONFIG_NET_LOGGING_USE_RINGBUFFER
 	printf("start mqtt logging(xRingBuffer): url=[%s] topic=[%s]\n", url, topic);
 	// Create RineBuffer
-	xRingBufferMQTT = xRingbufferCreate(xBufferSizeBytes, RINGBUF_TYPE_NOSPLIT);
+	xRingBufferMQTT = xRingbufferCreate(NET_LOGGING_XBUFFERSIZEBYTES, RINGBUF_TYPE_NOSPLIT);
 	configASSERT( xRingBufferMQTT );
 #else
 	printf("start mqtt logging(xMessageBuffer): url=[%s] topic=[%s]\n", url, topic);
 	// Create MessageBuffer
-	xMessageBufferMQTT = xMessageBufferCreate(xBufferSizeBytes);
+	xMessageBufferMQTT = xMessageBufferCreate(NET_LOGGING_XBUFFERSIZEBYTES);
 	configASSERT( xMessageBufferMQTT );
 #endif
 
@@ -291,12 +291,12 @@ esp_err_t http_logging_init(const char *url, int16_t enableStdout) {
 #if CONFIG_NET_LOGGING_USE_RINGBUFFER
 	printf("start http logging(xRingBuffer): url=[%s]\n", url);
 	// Create RineBuffer
-	xRingBufferHTTP = xRingbufferCreate(xBufferSizeBytes, RINGBUF_TYPE_NOSPLIT);
+	xRingBufferHTTP = xRingbufferCreate(NET_LOGGING_XBUFFERSIZEBYTES, RINGBUF_TYPE_NOSPLIT);
 	configASSERT( xRingBufferHTTP );
 #else
 	printf("start http logging(xMessageBuffer): url=[%s]\n", url);
 	// Create MessageBuffer
-	xMessageBufferHTTP = xMessageBufferCreate(xBufferSizeBytes);
+	xMessageBufferHTTP = xMessageBufferCreate(NET_LOGGING_XBUFFERSIZEBYTES);
 	configASSERT( xMessageBufferHTTP );
 #endif
 

@@ -195,7 +195,7 @@ void http_client(void *pvParameters)
 		char *buffer = (char *)xRingbufferReceive(xRingBufferHTTP, &received, portMAX_DELAY);
 		//printf("xRingBufferReceive received=%d\n", received);
 #else
-		char buffer[xItemSize];
+		char buffer[NET_LOGGING_XITEMSIZE];
 		size_t received = xMessageBufferReceive(xMessageBufferHTTP, buffer, sizeof(buffer), portMAX_DELAY);
 		//printf("xMessageBufferReceive received=%d\n", received);
 #endif
